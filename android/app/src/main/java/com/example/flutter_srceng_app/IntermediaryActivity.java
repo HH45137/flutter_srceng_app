@@ -20,7 +20,7 @@ public class IntermediaryActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        runGame();
+        runGame();
     }
 
     public void runGame() {
