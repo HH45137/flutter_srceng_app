@@ -22,9 +22,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
 public class MainActivity extends FlutterActivity {
-    public static String srcengDir = "";
-
-    private static final String channel = "runGame";
+    private static final String channel = "runIntermediaryActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class MainActivity extends FlutterActivity {
                     @Override
                     public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
                         if (methodCall.method != null) {
-                            result.success(runGame(methodCall.method));
+                            result.success(runIntermediaryActivity(methodCall.method));
                         } else {
                             result.notImplemented();
                         }
@@ -48,13 +46,13 @@ public class MainActivity extends FlutterActivity {
         );
     }
 
-    public String runGame(String dir) {
-        srcengDir = dir;
+    public String runIntermediaryActivity(String dir) {
+        IntermediaryActivity.srcengDir = dir;
 
-        Intent intent = new Intent(this, SDLActivity.class);
+        Intent intent = new Intent(this, IntermediaryActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
-        return srcengDir;
+        return null;
     }
 }

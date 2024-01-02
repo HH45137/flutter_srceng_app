@@ -51,7 +51,7 @@ class _IndexPage extends State<IndexPage> {
     return Align(
       child: ElevatedButton(
         onPressed: () async {
-          const platform = const MethodChannel('runGame');
+          const platform = const MethodChannel('runIntermediaryActivity');
           String returnValue = await platform.invokeMethod('/storage/emulated/0/半条命2/Half-Life 2/Half-Life 2/');
           print("返回值为：" + returnValue);
         },

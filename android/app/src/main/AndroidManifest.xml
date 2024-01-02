@@ -26,6 +26,16 @@
         </activity>
 
         <activity
+            android:name=".IntermediaryActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.flutter_srceng_app.IntermediaryActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name="org.libsdl.app.SDLActivity"
             android:configChanges="layoutDirection|locale|orientation|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:exported="true"
