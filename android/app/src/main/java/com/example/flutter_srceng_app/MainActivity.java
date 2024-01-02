@@ -24,15 +24,37 @@ import io.flutter.plugin.common.MethodChannel;
 public class MainActivity extends FlutterActivity {
     public static String srcengDir = "";
 
+    private static final String channel = "runGame";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        new MethodChannel(getFlutterEngine().getDartExecutor().getBinaryMessenger(), channel).setMethodCallHandler(
+                new MethodChannel.MethodCallHandler() {
+                    @Override
+                    public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
+                        if (methodCall.method != null) {
+                            result.success(runGame(methodCall.method));
+                        } else {
+                            result.notImplemented();
+                        }
+                    }
+                }
+        );
     }
 
-    public void runGame() {
+    public String runGame(String dir) {
+        srcengDir = dir;
+
         Intent intent = new Intent(this, SDLActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
+        return srcengDir;
     }
 }
